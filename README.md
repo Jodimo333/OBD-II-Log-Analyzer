@@ -20,7 +20,7 @@ Instead of sending a massive 10,000-row CSV file to an AI, which is slow, expens
 
 Well, first the Pandas filter doesn't just send the exact millisecond of failure; it is designed to grab a "time buffer" (the healthy data moments right before the temperature spikes) so the AI sees the physical transition. Second, I used a heavily structured System Prompt to "pre-train" the AI for that specific session, in short, I inject its exact persona, the strict rule-set for edge cases (like how to handle -99.0 sensor drops), and the expected output format. 
 
-This way, the AI gets the exact mechanical context it needs to diagnose the fault—seeing the RPM climb right before the temperature spikes—without wasting 150,000 API tokens on 20 minutes of healthy highway cruising.
+This way, the AI gets the exact mechanical context it needs to diagnose the fault, seeing the RPM climb right before the temperature spikes, without wasting 150,000 API tokens on 20 minutes of healthy highway cruising.
 
 ## Project MVPs
 
@@ -46,12 +46,12 @@ At the top of the interface, the user uploads the raw CSV log. The tool instantl
 
 ![Data Upload and Integrity Audit](images/top_interface.png)
 
-**Multi-Axis Telemetry Graph**  
-To better understand the physical context of a failure, the tool generates an interactive Plotly graph. By plotting Engine RPM on the primary axis (blue line) and Coolant Temperature on the secondary axis (red line), users can visually correlate mechanical load with thermal reaction. As seen in the timeline, this makes it incredibly easy to spot the exact moment a high-RPM stress event triggers a severe temperature spike, as well as the sudden negative drops that indicate a failing sensor.
+**MultiAxis Telemetry Graph**  
+To better understand the physical context of a failure, the tool generates an interactive Plotly graph. By plotting Engine RPM on the primary axis (blue line) and Coolant Temperature on the secondary axis (red line), users can visually correlate mechanical load with thermal reaction. As seen in the timeline, this makes it incredibly easy to spot the exact moment a highRPM stress event triggers a severe temperature spike, as well as the sudden negative drops that indicate a failing sensor.
 
 ![Telemetry Graph](images/telemetry_graph.png)
 
 **Automated Fault Diagnosis**  
-Instead of manually typing up incident tickets after analyzing the data, we simply click "Generate Diagnosis" to instantly draft a structured maintenance report. The AI processes the pre-filtered anomaly data and outputs a highly specific action plan. Thanks to the strict system prompt, it intelligently distinguishes between real mechanical strain (like voltage dropping under high RPM load) and data corruption (like physically impossible temperature spikes or -99.0 dropouts). This gives shop-floor mechanics exactly what they need to start inspecting the car immediately.
+Instead of manually typing up incident tickets after analyzing the data, we simply click "Generate Diagnosis" to instantly draft a structured maintenance report. The AI processes the prefiltered anomaly data and outputs a highly specific action plan. Thanks to the strict system prompt, it intelligently distinguishes between real mechanical strain (like voltage dropping under high RPM load) and data corruption (like physically impossible temperature spikes or 99.0 dropouts). This gives shopfloor mechanics exactly what they need to start inspecting the car immediately.
 
 ![AI Diagnosis](images/diagnosis.png)

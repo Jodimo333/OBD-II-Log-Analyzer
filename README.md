@@ -14,7 +14,7 @@ To make sure the team can trust the data and quickly identify the fault, the scr
 
 Every uploaded file starts with a Data Integrity Check. The script calculates the total number of cells and deducts the percentage of missing packets (like a sensor shorting out or a Bluetooth logger dropping connection), giving the file an overall Integrity Score.
 
-Instead of sending a massive 10,000-row CSV file to an AI—which is slow, expensive, and causes hallucinations, this tool uses a lightweight RAG (Retrieval-Augmented Generation) approach. It uses Pandas to filter the data, isolating only the exact seconds where a physical anomaly occurred (e.g., Coolant Temp > 100°C, or a sensor reading -99.0). It sends only this isolated slice of data to the Claude API, asking it to diagnose the fault based on the correlation between RPM, Load, and Voltage.
+Instead of sending a massive 10,000-row CSV file to an AI, which is slow, expensive, and causes hallucinations, this tool uses a lightweight RAG (Retrieval-Augmented Generation) approach. It uses Pandas to filter the data, isolating only the exact seconds where a physical anomaly occurred (e.g., Coolant Temp > 100°C, or a sensor reading -99.0). It sends only this isolated slice of data to the Claude API, asking it to diagnose the fault based on the correlation between RPM, Load, and Voltage.
 
 **But wait, you might ask yourself:** if I only slice and send the "problematic" data, won't the AI lack the baseline context to understand what normal driving looked like? Won't it just reply like a fresh, confused chat?
 
